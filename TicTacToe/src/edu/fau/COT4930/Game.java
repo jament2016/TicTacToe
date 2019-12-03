@@ -24,36 +24,53 @@ public class Game {
 		for(int i=0; i<a.length; i++) {
 			a[i]=empty;
 		}
-		pickSpot('X');
+		pickSpot(player1);
 	}
 	
-	public void pickSpot(char player ) {
-		System.out.println("Player "+this.turn+" turn \nPick a spot to play (0-9)");
+	public void pickSpot(Player player ) {
+		System.out.println("Player "+player.getName()+" turn \nPick a spot to play (0-9)");
 		Scanner input=new Scanner(System.in);
 		int spot= input.nextInt();
-		
-		a[spot]=this.turn;
-		checkEnd();
+		if(isOver()) {
+			System.out.println("game over");
+		}
+		else if(spotTaken(spot)) {
+			System.out.println("Spot is taken, pick another spot");
+			pickSpot(player);
+		}
+		else if (player.equals(player1)) {
+			a[spot]=player.getChar();
+			System.out.println(toString());
+			if(!isOver())
+				pickSpot(player2);
+		}
+		else if(player.equals(player2)) {
+			a[spot]=player.getChar();
+			System.out.println(toString());
+			if(!isOver());
+				pickSpot(player1);
+		}
 		
 	}
 	
-	public void checkEnd() {
-		System.out.println(this.toString());
+	public boolean spotTaken(int x) {
+		if(a[x]==empty) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean isOver() {
 		Results checkForEnd = new Results(a, this.turn);
 		if(checkForEnd.winDiagonal(this.turn)||checkForEnd.winHorizantal(this.turn)||checkForEnd.winVertical(this.turn))
 		{
-			System.out.println("Game over! Player "+this.turn+" Wins!");
-			askNewGame();
+			return true;
 		}
 		else if(checkForEnd.draw()) {
-			System.out.println("Tie game");
-			askNewGame();
+			return true;
 		}
 		else {
-			if(this.turn=='X')
-				this.turn='O';
-			else this.turn='X';
-			pickSpot(this.turn);
+			return false;
 		}
 	}
 	
