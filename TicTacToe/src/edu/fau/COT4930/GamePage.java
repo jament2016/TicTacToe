@@ -25,6 +25,7 @@ public class GamePage  {
 	JPanel buttonPanel;
 	JLabel player1;
 	JLabel player2;
+	Border b=BorderFactory.createLineBorder(Color.yellow);
 	
 	public GamePage(Player p1, Player p2) {
 		this.g=new Game(p1, p2);
@@ -58,6 +59,7 @@ public class GamePage  {
 		player1=new JLabel(g.getPlayer(1).getName(), SwingConstants.CENTER);
 		player1.setForeground(Color.YELLOW);
 		player1.setFont(font);
+		player1.setBorder(b);
 		player2=new JLabel(g.getPlayer(2).getName(), SwingConstants.CENTER);
 		player2.setForeground(Color.YELLOW);
 		player2.setFont(font);
@@ -119,15 +121,27 @@ public class GamePage  {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String text=((JButton) e.getSource()).getText();
-				if(!g.spotTaken(i)) {
+				if(!g.spotTaken(i)&&!g.isOver()) {
+					
 					((JButton) e.getSource()).setText(g.getTurn().getChar());
 					g.pickSpot(g.getTurn(), i);
-					turn=g.getTurn().getName()+"'s turn";
-					getTurn.setText(turn);
-					//System.out.println(text);
-					Border b=BorderFactory.createLineBorder(Color.yellow);
-					player1.setBorder(b);
+					if(g.isOver()) {
+						turn=g.getWinner();
 					}
+					else {
+						if(g.getTurn()==g.getPlayer(1)) {
+							player1.setBorder(b);
+							player2.setBorder(null);
+						}
+						if(g.getTurn()==g.getPlayer(2)) {
+							player2.setBorder(b);
+							player1.setBorder(null);
+						}
+						turn=g.getTurn().getName()+"'s turn";
+						
+					}
+					getTurn.setText(turn);
+				}
 			}
 			
 		};

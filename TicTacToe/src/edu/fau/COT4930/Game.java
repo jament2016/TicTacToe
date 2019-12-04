@@ -9,6 +9,7 @@ public class Game {
 	private String turn="X";
 	private char empty='_';
 	public String[] a=new String[9];
+	private String winner;
 	
 	public Game(Player player1, Player player2) {
 		this.player1=player1;
@@ -29,14 +30,15 @@ public class Game {
 	}
 	
 	public void pickSpot(Player player, int i ) {
-		if(player.equals(player1)) {
+		if(player.equals(player2)) {
 			a[i]=player.getChar();
 			if(!isOver())
-				currentTurn=player2;
+				currentTurn=player1;
 		}
 		else {
 			a[i]=player.getChar();
-			currentTurn=player1;
+			if(!isOver())
+				currentTurn=player2;
 		}
 	}
 	
@@ -49,27 +51,28 @@ public class Game {
 	}
 	
 	public boolean isOver() {
-		Results checkForEnd = new Results(a, this.turn);
+		turn=currentTurn.getChar();
+		Results checkForEnd = new Results(a, turn);
 		if(checkForEnd.winDiagonal(this.turn)||checkForEnd.winHorizantal(this.turn)||checkForEnd.winVertical(this.turn))
 		{
+			winner=checkForEnd.getWinner();
 			return true;
 		}
 		else if(checkForEnd.draw()) {
+			winner=checkForEnd.getWinner();
 			return true;
 		}
 		else {
 			return false;
 		}
 	}
-	
-	public void askNewGame() {
-		System.out.println("New game? (y/n)");
-		Scanner input=new Scanner(System.in);
-		char yn= input.next().charAt(0);
-		if(yn=='y') {
-			new Game(player1, player2);
-		}
-		else System.out.println("Thanks for playing ");
+
+	public String getWinner() {
+		if(winner.equals("X"))
+			return player1.getName()+" Wins!";
+		if(winner.equals("O"))
+			return player2.getName()+" Wins!";
+		return "Draw!";
 	}
 
 	public Player getTurn() {
