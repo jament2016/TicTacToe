@@ -5,13 +5,15 @@ import java.util.Scanner;
 public class Game {
 
 	private Player player1, player2;
-	private char turn='X';
+	private Player currentTurn;
+	private String turn="X";
 	private char empty='_';
-	public char[] a=new char[9];
+	public String[] a=new String[9];
 	
 	public Game(Player player1, Player player2) {
 		this.player1=player1;
 		this.player2=player2;
+		currentTurn=this.player1;
 		populate();
 	}
 	
@@ -22,39 +24,25 @@ public class Game {
 	
 	public void populate() {
 		for(int i=0; i<a.length; i++) {
-			a[i]=empty;
+			a[i]="";
 		}
-		pickSpot(player1);
 	}
 	
-	public void pickSpot(Player player ) {
-		System.out.println("Player "+player.getName()+" turn \nPick a spot to play (0-9)");
-		Scanner input=new Scanner(System.in);
-		int spot= input.nextInt();
-		if(isOver()) {
-			System.out.println("game over");
-		}
-		else if(spotTaken(spot)) {
-			System.out.println("Spot is taken, pick another spot");
-			pickSpot(player);
-		}
-		else if (player.equals(player1)) {
-			a[spot]=player.getChar();
-			System.out.println(toString());
+	public void pickSpot(Player player, int i ) {
+		if(player.equals(player1)) {
+			a[i]=player.getChar();
 			if(!isOver())
-				pickSpot(player2);
+				currentTurn=player2;
 		}
-		else if(player.equals(player2)) {
-			a[spot]=player.getChar();
-			System.out.println(toString());
-			if(!isOver());
-				pickSpot(player1);
+		else {
+			a[i]=player.getChar();
+			currentTurn=player1;
 		}
-		
 	}
 	
 	public boolean spotTaken(int x) {
-		if(a[x]==empty) {
+		System.out.println("Spot: " + a[x]);
+		if(a[x]=="") {
 			return false;
 		}
 		return true;
@@ -74,13 +62,6 @@ public class Game {
 		}
 	}
 	
-	public String toString() {
-		String s=a[0]+" "+a[1]+" "+a[2]+
-				"\n"+a[3]+" "+a[4]+" "+a[5]+
-				"\n"+a[6]+" "+a[7]+" "+a[8];
-		return s;
-	}
-	
 	public void askNewGame() {
 		System.out.println("New game? (y/n)");
 		Scanner input=new Scanner(System.in);
@@ -89,5 +70,16 @@ public class Game {
 			new Game(player1, player2);
 		}
 		else System.out.println("Thanks for playing ");
+	}
+
+	public Player getTurn() {
+		// TODO Auto-generated method stub
+		return currentTurn;
+	}
+	
+	public Player getPlayer(int i) {
+		if(i==1)
+			return player1;
+		return player2;
 	}
 }

@@ -7,6 +7,7 @@ public class Player
 {
 	private String name;
 	private char c;
+	private int score;
 
 	/**
 		The constructor creates a default Player object.
@@ -19,10 +20,11 @@ public class Player
 		The constructor creates a Player object with the specified name.
 		@param n represents the name of the Player.
 	*/
-	public Player(String n, char c)
+	public Player(String n, char c, int score)
 	{
 		name = n;
 		this.c=c;
+		this.score=score;
 	}  
 
 	/**
@@ -47,7 +49,7 @@ public class Player
 	Method to return the Players character
 	@return a character representing the players character
 	*/
-	public char getChar() {
-		return this.c;
+	public String getChar() {
+		return String.valueOf(this.c);
 	}
 }

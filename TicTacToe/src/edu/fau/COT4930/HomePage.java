@@ -14,8 +14,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+
+import sun.invoke.empty.Empty;
 
 
 public class HomePage  {
@@ -78,7 +81,7 @@ public class HomePage  {
 		JLabel player1=new JLabel("Player 1: ", SwingConstants.CENTER);
 		player1.setForeground(Color.YELLOW);
 		player1.setFont(f);
-		JLabel player2=new JLabel("Player 1: ", SwingConstants.CENTER);
+		JLabel player2=new JLabel("Player 2: ", SwingConstants.CENTER);
 		player2.setForeground(Color.YELLOW);
 		player2.setFont(f);
 		textLabel.add(player1);
@@ -86,13 +89,22 @@ public class HomePage  {
 		textLabel.setForeground(Color.YELLOW);
 		textLabel.setBackground(frame.getBackground());
 		
+		JPanel text=new JPanel(new GridLayout(1,6));
+		text.setBackground(frame.getBackground());
+		JTextField p1=new JTextField("Player 1");
+		JTextField p2=new JTextField("Player 2");
+		text.add(p1);
+		text.add(p2);
+		
 		newGame.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				frame.setVisible(false);
-				new GamePage();
+				Player play1=new Player(p1.getText(), 'X',0);
+				Player play2=new Player(p2.getText(), 'O',0);
+				new GamePage(play1, play2);
 				
 			}
 			
@@ -110,8 +122,10 @@ public class HomePage  {
 		mainPanel.add(titlePanel);
 		mainPanel.add(buttonPanel);
 		mainPanel.add(textLabel);
+		mainPanel.add(text);
 		
 		frame.add(mainPanel);
+		frame.setVisible(true);
 		
 	}
 }

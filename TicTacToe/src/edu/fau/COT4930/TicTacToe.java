@@ -3,8 +3,6 @@ package edu.fau.COT4930;
 
 public class TicTacToe {
 
-	public static final int WINDOW_WIDTH = 1280;/// CHANGE RES HERE ONLY!
-	public static final int WINDOW_HEIGHT = WINDOW_WIDTH / 16 * 9; // 16 by 9 aspect ratio
 	
 	public TicTacToe() {
 		new HomePage();
