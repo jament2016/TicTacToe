@@ -68,11 +68,9 @@ public class Results {
 	
 	public boolean draw() {
 		if(winHorizantal("X")||winHorizantal("O")||winVertical("X")||winVertical("O")||winDiagonal("X")||winDiagonal("O")) {
-			System.out.println("Winner found");
 			return false;
 		}
 		else if(!isNotFinished()) {
-			System.out.println("Is Finished");
 			winner="draw";
 			return true;
 		}

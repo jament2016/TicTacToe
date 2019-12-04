@@ -20,14 +20,11 @@ public class GamePage  {
 	private JFrame f;
 	private Game g;
 	private String turn;
-	JLabel getTurn;
 	JButton button[]=new JButton[9];
 	JPanel buttonPanel;
-	JLabel player1;
-	JLabel player2;
+	JLabel player1 ,player2, getTurn, score1, score2;
 	Border b=BorderFactory.createLineBorder(Color.yellow);
 	Score p1,p2;
-	JLabel score1, score2;
 	
 	public GamePage(Player p1, Player p2) {
 		this.g=new Game(p1, p2);
@@ -58,7 +55,7 @@ public class GamePage  {
 		buttonPanel=buildButtonPanel();
 		mainPanel.add(buttonPanel);
 		mainPanel.add(new JLabel(""));
-		JPanel textLabel=new JPanel(new GridLayout(1,3));
+		JPanel textLabel=new JPanel(new GridLayout(1,3,15,5));
 		font=new Font("SansSerif", Font.PLAIN,35);
 		player1=new JLabel(g.getPlayer(1).getName(), SwingConstants.CENTER);
 		player1.setForeground(Color.YELLOW);
@@ -136,14 +133,14 @@ public class GamePage  {
 	}
 	
 	public JPanel buildButtonPanel() {
-		JPanel buttonPanel=new JPanel(new GridLayout(3,6));
+		JPanel buttonPanel=new JPanel(new GridLayout(3,3,3,3));
 		buttonPanel.setBackground(f.getBackground());	
 
 		for(int i=0; i<9; i++) {
 			button[i]=new JButton();
 			button[i].addActionListener(actList(i));
 		}
-		Font font=new Font("SansSerif", Font.BOLD, 55);
+		Font font=new Font("SansSerif", Font.BOLD, 50);
 		button[0].setFont(font);
 		buttonPanel.add(new JLabel(""));
 		buttonPanel.add(button[0]);
@@ -167,7 +164,7 @@ public class GamePage  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String text=((JButton) e.getSource()).getText();
+				//String text=((JButton) e.getSource()).getText();
 				if(!g.spotTaken(i)&&!g.isOver()) {
 					
 					if(g.getTurn().equals(g.getPlayer(1)))

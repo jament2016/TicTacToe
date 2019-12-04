@@ -1,24 +1,18 @@
 package edu.fau.COT4930;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
-import sun.invoke.empty.Empty;
 
 
 public class HomePage  {
@@ -89,13 +83,22 @@ public class HomePage  {
 		textLabel.setForeground(Color.YELLOW);
 		textLabel.setBackground(frame.getBackground());
 		
-		JPanel text=new JPanel(new GridLayout(1,6));
+		JPanel text=new JPanel(new GridLayout(2,5));
 		text.setBackground(frame.getBackground());
-		JTextField p1=new JTextField("Player 1");
-		JTextField p2=new JTextField("Player 2");
-		text.add(p1);
-		text.add(p2);
+		JTextField p1=new JTextField("Player 1", SwingConstants.RIGHT);
+		JTextField p2=new JTextField("Player 2",SwingConstants.RIGHT);
+		p1.setHorizontalAlignment(JTextField.CENTER);
+		p2.setHorizontalAlignment(JTextField.CENTER);
 		
+		for(int i=0; i<10; i++) {
+			if(i==1)
+				text.add(p1);
+			if(i==3)
+				text.add(p2);
+			else 
+				text.add(new JLabel(""));
+		}
+
 		newGame.addActionListener(new ActionListener() {
 
 			@Override
