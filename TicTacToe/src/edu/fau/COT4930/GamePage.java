@@ -170,7 +170,10 @@ public class GamePage  {
 				String text=((JButton) e.getSource()).getText();
 				if(!g.spotTaken(i)&&!g.isOver()) {
 					
-					((JButton) e.getSource()).setText(g.getTurn().getChar());
+					if(g.getTurn().equals(g.getPlayer(1)))
+						((JButton) e.getSource()).setText("X");
+					else 
+						((JButton) e.getSource()).setText("O");
 					g.pickSpot(g.getTurn(), i);
 					if(g.isOver()) {
 						turn=g.getWinner();

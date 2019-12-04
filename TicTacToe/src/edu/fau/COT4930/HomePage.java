@@ -102,8 +102,8 @@ public class HomePage  {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				frame.setVisible(false);
-				Player play1=new Player(p1.getText(), 'X');
-				Player play2=new Player(p2.getText(), 'O');
+				Player play1=new Player(p1.getText());
+				Player play2=new Player(p2.getText());
 				new GamePage(play1, play2);
 				
 			}

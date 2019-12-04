@@ -31,12 +31,12 @@ public class Game {
 	
 	public void pickSpot(Player player, int i ) {
 		if(player.equals(player2)) {
-			a[i]=player.getChar();
+			a[i]="O";
 			if(!isOver())
 				currentTurn=player1;
 		}
 		else {
-			a[i]=player.getChar();
+			a[i]="X";
 			if(!isOver())
 				currentTurn=player2;
 		}
@@ -51,7 +51,9 @@ public class Game {
 	}
 	
 	public boolean isOver() {
-		turn=currentTurn.getChar();
+		if(currentTurn.equals(getPlayer(1)))
+			turn="X";
+		else turn="O";
 		Results checkForEnd = new Results(a, turn);
 		if(checkForEnd.winDiagonal(this.turn)||checkForEnd.winHorizantal(this.turn)||checkForEnd.winVertical(this.turn))
 		{
