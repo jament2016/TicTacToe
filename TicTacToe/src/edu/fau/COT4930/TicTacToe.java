@@ -5,6 +5,7 @@ public class TicTacToe {
 
 	
 	public TicTacToe() {
+		SerializeScore.init();
 		new HomePage();
 	//	PageManager.init();
 		//WindowManager.init();
@@ -18,6 +19,15 @@ public class TicTacToe {
 		
 
 		new TicTacToe();
+		/*
+		Player p=new Player("P1",'x');
+		Score s=new Score(p.getName(), 0);
+		s.setScore(5);
+		System.out.println(s.getScore());
+		Player q=new Player("P1", 'x');
+		Score x=SerializeScore.getScore(q);
+		System.out.println("x score:"+x.getScore());
+		*/
 	}
 
 }

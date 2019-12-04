@@ -55,19 +55,28 @@ public class Results {
 	
 	public boolean isNotFinished() {
 		for(int i=0; i<board.length; i++) {
-			if(board[i].equals(""))
+			if(board[i].equals("")) {
 				return true;
+			}
 		}
 		return false;
 	}
 	
+	public boolean isWinner() {
+		return winHorizantal("X")||winHorizantal("O")||winVertical("X")||winVertical("O")||winDiagonal("X")||winDiagonal("O");
+	}
+	
 	public boolean draw() {
-		boolean draw=(winHorizantal("X")||winHorizantal("O")||winVertical("X")||winVertical("O")||winDiagonal("X")||winDiagonal("O"));
-		draw=(draw&&!isNotFinished());
-		if(draw) {
-			winner="draw";
+		if(winHorizantal("X")||winHorizantal("O")||winVertical("X")||winVertical("O")||winDiagonal("X")||winDiagonal("O")) {
+			System.out.println("Winner found");
+			return false;
 		}
-		return draw && !isNotFinished();
+		else if(!isNotFinished()) {
+			System.out.println("Is Finished");
+			winner="draw";
+			return true;
+		}
+		return false;
 	}
 	
 	public String getWinner() {

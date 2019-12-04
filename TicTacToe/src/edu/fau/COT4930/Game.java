@@ -43,7 +43,7 @@ public class Game {
 	}
 	
 	public boolean spotTaken(int x) {
-		System.out.println("Spot: " + a[x]);
+		
 		if(a[x]=="") {
 			return false;
 		}
