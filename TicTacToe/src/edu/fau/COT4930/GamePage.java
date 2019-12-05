@@ -6,11 +6,16 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -44,7 +49,7 @@ public class GamePage  {
 		
 		JPanel mainPanel=new JPanel(new GridLayout(5,1));
 		mainPanel.setBackground(f.getBackground());
-		
+		f.setJMenuBar(menuBar());
 		Font font=new Font("SansSerif", Font.BOLD, 70);
 		
 		getTurn.setFont(font);
@@ -201,5 +206,120 @@ public class GamePage  {
 			
 		};
 		return li;
+	}
+	
+	private JMenuBar menuBar() {
+		JMenuBar mb=new JMenuBar();
+		JMenu x=new JMenu("Menu");
+		JMenuItem m1=new JMenuItem("Home Page");
+		JMenuItem m2=new JMenuItem("Help Window");
+		JMenuItem m3=new JMenuItem("New Game");
+		
+		m1.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				f.setVisible(false);
+				new HomePage();
+			}
+			
+		});
+		
+		m2.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				new InstructionsPage();
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		m3.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				f.setVisible(false);
+				new GamePage(g.getPlayer(1), g.getPlayer(2));
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		x.add(m1);
+		x.add(m2);
+		x.add(m3);
+		mb.add(x);
+		return mb;
 	}
 }
